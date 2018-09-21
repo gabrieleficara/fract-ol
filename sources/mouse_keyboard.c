@@ -1,5 +1,11 @@
 #include "fractol.h"
 
+int exit_x(void *pars)
+{
+	delete_image((t_pars *)pars, 0);
+	exit(0);
+}
+
 int		esc_reset(int key, t_pars *pars)
 {
 	if (key == 53)
@@ -26,7 +32,7 @@ int		rrggbb_key(int key, t_pars *pars)
 	if (key == 45)
 		pars->color[5] = (pars->color[5] == 1) ? 0 : 1;
 	if (key == 48)
-		pars->color_mod = (pars->color_mod == 255) ? 610 : 255;
+		pars->color_mod = (pars->color_mod == 255) ? 510 : 255;
 	putimg(pars);
 	return (0);
 }

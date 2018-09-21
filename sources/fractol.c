@@ -39,15 +39,15 @@ int			mouse_hook(int button, int x, int y, void *param)
 	pars = (t_pars *)param;
 	if (button == 4)
 	{
-		pars->zoom += 0.01;
-		pars->center[0] += 0.01 * (pars->size[0] / 2 - x);
-		pars->center[1] += 0.01 * (pars->size[0] / 2 - y);
+		pars->zoom += 0.1;
+		pars->center[0] += 0.1 * (pars->size[0] / 2 - x);
+		pars->center[1] += 0.1 * (pars->size[0] / 2 - y);
 	}
 	if (button == 5 && pars->zoom > 0)
 	{
-		pars->zoom -= 0.01;
-		pars->center[0] += 0.01 * (pars->size[0] / 2 - x);
-		pars->center[1] += 0.01 * (pars->size[1] / 2 - y);
+		pars->zoom -= 0.1;
+		pars->center[0] += 0.1 * (pars->size[0] / 2 - x);
+		pars->center[1] += 0.1 * (pars->size[1] / 2 - y);
 	}
 	putimg(pars);
 	x = 0;
@@ -114,6 +114,7 @@ int			main(int ac, char **av)
 	mlx_hook(pars.window, 6, 0L, motion, (void *)&pars);
 	mlx_key_hook(pars.window, dealkey, (void *)&pars);
 	mlx_mouse_hook(pars.window, mouse_hook, (void *)&pars);
+	mlx_hook(pars.window, 17, 1L << 17, exit_x, (void *)&pars);
 	mlx_loop(pars.mini);
 	return (0);
 }

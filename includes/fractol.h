@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <pthread.h>
+# include <sys/types.h>
+# include <unistd.h>
 
 # define HEIGHT		720
 # define WIDTH		1280
@@ -71,5 +73,5 @@ int				color_abs_julia(t_pars *pars, int coor[2]);
 int				color_mandelbrot(t_pars *pars, int coor[2]);
 int				color_burning_ship(t_pars *pars, int coor[2]);
 int				color_newton(t_pars *pars, int coor[2]);
-
+int				exit_x(void *pars);
 #endif

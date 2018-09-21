@@ -14,7 +14,7 @@
 
 int		usage(char *str)
 {
-	ft_printf("Usage : %s <fractal_name>\nfractal:\tJulia\n", str);
+	ft_printf("Usage : %s <fractal 1> <fractal 2>\nfractal:\tJulia\n", str);
 	ft_printf("\t\tMandelbrot\n\t\tBurning ship\n", str);
 	return (-ft_printf("\t\tNewton\n\t\tAbs julia\n", str));
 }
@@ -36,20 +36,42 @@ int		delete_image(t_pars *pars, int flag)
 	return (1);
 }
 
+void		fractchoise(char **av, int i, t_pars *pars)
+{
+	if (!ft_strcmp("Julia", av[i]) || !ft_strcmp("julia", av[i]))
+		pars->fract = 1;
+	else if (!ft_strcmp("Mandelbrot", av[i]) || !ft_strcmp("mandelbrot", av[i]))
+		pars->fract = 2;
+	else if (!ft_strcmp("Burning ship", av[i]) || !ft_strcmp("burning ship", av[i]))
+		pars->fract = 3;
+	else if (!ft_strcmp("Newton", av[i]) || !ft_strcmp("newton", av[i]))
+		pars->fract = 4;
+	else if (!ft_strcmp("Abs julia", av[i]) || !ft_strcmp("abs julia", av[i]))
+		pars->fract = 5;
+	else 
+		pars->fract = -1;
+
+}
+
 int		parsing(int ac, char **av, t_pars *pars)
 {
+	int	i;
+	int	fo;
+
 	pars->fract = 0;
-	if (ac != 2)
+	if (ac < 2 || ac > 3)
 		return (usage(av[0]));
-	if (!ft_strcmp("Julia", av[1]) || !ft_strcmp("julia", av[1]))
-		return((pars->fract = 1));
-	if (!ft_strcmp("Mandelbrot", av[1]) || !ft_strcmp("mandelbrot", av[1]))
-		return ((pars->fract = 2));
-	if (!ft_strcmp("Burning ship", av[1]) || !ft_strcmp("burning ship", av[1]))
-		return ((pars->fract = 3));
-	if (!ft_strcmp("Newton", av[1]) || !ft_strcmp("newton", av[1]))
-		return ((pars->fract = 4));
-	if (!ft_strcmp("Abs julia", av[1]) || !ft_strcmp("abs julia", av[1]))
-		return ((pars->fract = 5));
-	return (usage(av[0]));
+	i = 0;
+	while (++i < ac)
+	{
+		if (i > 1)
+		{
+			fo = fork();
+			if (fo != 0)
+				fractchoise(av, i, pars);
+		}
+		else 
+			fractchoise(av, i, pars);
+	}
+	return ((pars->fract == -1) ? usage(av[0]) : 1);
 }
