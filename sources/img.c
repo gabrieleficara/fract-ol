@@ -6,7 +6,7 @@
 /*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:08:07 by gficara           #+#    #+#             */
-/*   Updated: 2018/09/20 18:19:41 by gficara          ###   ########.fr       */
+/*   Updated: 2018/09/24 18:50:04 by gficara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int		color_transform(int n, int i, t_pars *pars)
 				return (n * pars->color[i]);
 		}
 		else
+		{
 			if (n > 255)
 				return (((n - 255) * pars->color[i]));
 			else
 				return (255 - n * pars->color[i]);
+		}
 	}
 }
 

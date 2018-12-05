@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/24 18:53:56 by gficara           #+#    #+#             */
+/*   Updated: 2018/09/24 18:55:34 by gficara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int		color_julia(t_pars *pars, int coor[2])
@@ -18,7 +30,7 @@ int		color_julia(t_pars *pars, int coor[2])
 		new[0] = old[0] * old[0] - old[1] * old[1] + pars->cons[0];
 		new[1] = 2 * old[0] * old[1] + pars->cons[1];
 		if (new[0] * new[0] + new[1] + new[1] > 4)
-			break;
+			break ;
 	}
 	n = (pars->color_mod * n) / MAX_ITER;
 	return (color_to_number(color_transform(n, 0, pars),
@@ -46,7 +58,7 @@ int		color_mandelbrot(t_pars *pars, int coor[2])
 		new[0] = old[0] * old[0] - old[1] * old[1] + p[0];
 		new[1] = 2 * old[0] * old[1] + p[1];
 		if (new[0] * new[0] + new[1] + new[1] > 4)
-			break;
+			break ;
 	}
 	n = (pars->color_mod * n) / MAX_ITER;
 	return (color_to_number(color_transform(n, 0, pars),
@@ -73,7 +85,7 @@ int		color_newton(t_pars *pars, int coor[2])
 		new[1] = 3 * old[0] * old[0] * old[1] - old[1] * old[1] * old[1] +
 			pars->cons[1];
 		if (new[0] * new[0] + new[1] + new[1] > 4)
-			break;
+			break ;
 	}
 	n = (pars->color_mod * n) / MAX_ITER;
 	return (color_to_number(color_transform(n, 0, pars),
@@ -98,12 +110,13 @@ int		color_abs_julia(t_pars *pars, int coor[2])
 		new[0] = old[0] * old[0] - old[1] * old[1] + pars->cons[0];
 		new[1] = 2 * old[0] * old[1] + pars->cons[1];
 		if (new[0] * new[0] + new[1] + new[1] > 4)
-			break;
+			break ;
 	}
 	n = (pars->color_mod * n) / MAX_ITER;
 	return (color_to_number(color_transform(n, 0, pars),
 				color_transform(n, 1, pars), color_transform(n, 2, pars)));
 }
+
 int		color_burning_ship(t_pars *pars, int coor[2])
 {
 	int		n;
@@ -124,7 +137,7 @@ int		color_burning_ship(t_pars *pars, int coor[2])
 		new[1] = 2 * fabs(new[0] * new[1]) + old[1];
 		new[0] = fabs(tmp);
 		if (new[0] * new[0] + new[1] + new[1] > 4)
-			break;
+			break ;
 	}
 	n = (pars->color_mod * n) / MAX_ITER;
 	return (color_to_number(color_transform(n, 0, pars),

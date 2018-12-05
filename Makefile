@@ -6,7 +6,7 @@
 #    By: gficara <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 17:25:41 by gficara           #+#    #+#              #
-#    Updated: 2018/09/20 14:07:31 by gficara          ###   ########.fr        #
+#    Updated: 2018/12/05 17:21:55 by gficara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ TRH = -pthread
 
 FRAME = -lmlx -framework OpenGL -framework AppKit
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-INC = -I includes -I libftprintf/includes/
+INC = -I includes -I libftprintf/includes/ -I minilibx
 
 SRC = sources/fractol.c \
 	  sources/parsing.c \
@@ -41,6 +41,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) Makefile
 	@make -C libftprintf
+	@make -C minilibx
 	@ar rc $(LIB) $(OBJ)
 	@ranlib $(LIB)
 	@$(CC) $(FLAGS) $(THR) -o $(NAME) $(LIB) $(LIB2) $(FRAME)
@@ -51,6 +52,7 @@ $(NAME) : $(OBJ) Makefile
 
 clean :
 	@make clean -C libftprintf
+	@make clean -C minilibx
 	@rm -rf $(OBJ)
 	@echo "Removing $(NAME) objects"
 

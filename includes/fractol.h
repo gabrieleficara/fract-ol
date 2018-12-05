@@ -6,14 +6,14 @@
 /*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 14:33:48 by gficara           #+#    #+#             */
-/*   Updated: 2018/09/20 18:21:56 by gficara          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:22:29 by gficara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-# include <mlx.h>
+# include "mlx.h"
 # include "ft_printf.h"
 # include <fcntl.h>
 # include <math.h>
@@ -23,8 +23,8 @@
 
 # define HEIGHT		720
 # define WIDTH		1280
-# define MAX_ITER	100
-# define RADIUS		6
+# define MAX_ITER	70
+# define RADIUS		2
 
 typedef struct	s_pars
 {
@@ -43,6 +43,7 @@ typedef struct	s_pars
 	int			m_coor[2];
 	int			f_mov;
 	int			color_mod;
+	int			fork;
 }				t_pars;
 
 typedef struct	s_thr
@@ -74,4 +75,5 @@ int				color_mandelbrot(t_pars *pars, int coor[2]);
 int				color_burning_ship(t_pars *pars, int coor[2]);
 int				color_newton(t_pars *pars, int coor[2]);
 int				exit_x(void *pars);
+
 #endif

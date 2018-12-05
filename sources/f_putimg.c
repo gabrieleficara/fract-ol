@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_putimg.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/24 18:45:35 by gficara           #+#    #+#             */
+/*   Updated: 2018/09/24 18:47:15 by gficara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	*filling(void *param)
@@ -64,7 +76,7 @@ void	putimg(t_pars *pars)
 		thr[i].img_c = mlx_get_data_addr(pars->img, &thr[i].bpp, &thr[i].sl,
 				&thr[i].end);
 		thr[i].pars = pars;
-		pthread_create(&(thr[i].thread), NULL, *filling, (void *) &(thr[i]));
+		pthread_create(&(thr[i].thread), NULL, *filling, (void *)&(thr[i]));
 	}
 	i = -1;
 	while (++i < 4)

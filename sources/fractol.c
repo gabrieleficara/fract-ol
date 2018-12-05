@@ -6,13 +6,13 @@
 /*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 14:24:46 by gficara           #+#    #+#             */
-/*   Updated: 2018/09/20 18:21:54 by gficara          ###   ########.fr       */
+/*   Updated: 2018/09/25 14:10:29 by gficara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int motion(int x, int y, void *param)
+int			motion(int x, int y, void *param)
 {
 	t_pars	*pars;
 
@@ -43,7 +43,7 @@ int			mouse_hook(int button, int x, int y, void *param)
 		pars->center[0] += 0.1 * (pars->size[0] / 2 - x);
 		pars->center[1] += 0.1 * (pars->size[0] / 2 - y);
 	}
-	if (button == 5 && pars->zoom > 0)
+	if (button == 5 && pars->zoom > 0.1)
 	{
 		pars->zoom -= 0.1;
 		pars->center[0] += 0.1 * (pars->size[0] / 2 - x);

@@ -6,7 +6,7 @@
 /*   By: gficara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 15:05:39 by gficara           #+#    #+#             */
-/*   Updated: 2018/09/20 18:07:31 by gficara          ###   ########.fr       */
+/*   Updated: 2018/09/24 18:52:31 by gficara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 int		usage(char *str)
 {
-	ft_printf("Usage : %s <fractal 1> <fractal 2>\nfractal:\tJulia\n", str);
+	ft_printf("Usage : %s <fractal 1>\nfractal:\tJulia\n", str);
 	ft_printf("\t\tMandelbrot\n\t\tBurning ship\n", str);
-	return (-ft_printf("\t\tNewton\n\t\tAbs julia\n", str));
+	ft_printf("\t\tNewton\n\t\tAbs julia\n", str);
+	ft_printf("Arrows: move the fractal\nMouse: transform the fractal", str);
+	ft_printf("(if possible)\nMouse Wheel: zoom in/out\n", str);
+	ft_printf("Shift: switch Fractal\nTab: switch color mode\n");
+	return (-ft_printf("r-g-b|t-h-n: manage colors|negative \n", str));
 }
 
-void		legend(t_pars *pars)
+void	legend(t_pars *pars)
 {
 	if (pars->hide == 1)
 		return ;
@@ -36,42 +40,27 @@ int		delete_image(t_pars *pars, int flag)
 	return (1);
 }
 
-void		fractchoise(char **av, int i, t_pars *pars)
+void	fractchoise(char **av, int i, t_pars *pars)
 {
 	if (!ft_strcmp("Julia", av[i]) || !ft_strcmp("julia", av[i]))
 		pars->fract = 1;
 	else if (!ft_strcmp("Mandelbrot", av[i]) || !ft_strcmp("mandelbrot", av[i]))
 		pars->fract = 2;
-	else if (!ft_strcmp("Burning ship", av[i]) || !ft_strcmp("burning ship", av[i]))
+	else if (!ft_strcmp("Burning ship", av[i]) ||
+			!ft_strcmp("burning ship", av[i]))
 		pars->fract = 3;
 	else if (!ft_strcmp("Newton", av[i]) || !ft_strcmp("newton", av[i]))
 		pars->fract = 4;
 	else if (!ft_strcmp("Abs julia", av[i]) || !ft_strcmp("abs julia", av[i]))
 		pars->fract = 5;
-	else 
+	else
 		pars->fract = -1;
-
 }
 
 int		parsing(int ac, char **av, t_pars *pars)
 {
-	int	i;
-	int	fo;
-
-	pars->fract = 0;
-	if (ac < 2 || ac > 3)
+	if (ac != 2)
 		return (usage(av[0]));
-	i = 0;
-	while (++i < ac)
-	{
-		if (i > 1)
-		{
-			fo = fork();
-			if (fo != 0)
-				fractchoise(av, i, pars);
-		}
-		else 
-			fractchoise(av, i, pars);
-	}
+	fractchoise(av, 1, pars);
 	return ((pars->fract == -1) ? usage(av[0]) : 1);
 }
